@@ -7,10 +7,8 @@ You can install Presidio as a service in [Kubernetes](https://kubernetes.io/) or
 ```sh
 # Build the images
 
-$ export DOCKER_REGISTRY=presidio
+$ export DOCKER_REGISTRY=mcr.microsoft.com
 $ export PRESIDIO_LABEL=latest
-$ make DOCKER_REGISTRY=${DOCKER_REGISTRY} PRESIDIO_LABEL=${PRESIDIO_LABEL} docker-build-deps
-$ make DOCKER_REGISTRY=${DOCKER_REGISTRY} PRESIDIO_LABEL=${PRESIDIO_LABEL} docker-build
 
 # Run the containers
 
@@ -40,7 +38,7 @@ $ docker run --rm --name presidio-api --network mynetwork -d -p 8080:8080 -e WEB
 2. Install [Redis](https://hub.kubeapps.com/charts/stable/redis) (Cache for storage and database scanners)
 
     ```sh
-    $ helm install --name redis stable/redis --set usePassword=false,rbac.create=true --namespace presidio-system
+    $ helm install --name redis stable/redis --set usePassword=false,rbac.create=true --namespace presidio-system --wait
     ```
 
 3. Optional - Ingress controller for presidio API.
